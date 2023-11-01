@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, createRef } from "react";
 import style from "./Body.module.scss";
 
 const progressBarStyles = {
@@ -13,13 +13,14 @@ const progressBarStyles = {
 
 
 const Body = (props) => {
-  const [rows, setRows] = useState([
+  
+  const [rows,setRows] = useState([
     {
       image:
         "https://images.unsplash.com/photo-1502395809857-fd80069897d0?auto=format&fit=crop&q=80&w=2970&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       title: "Sourcing of Raw Materials",
       text: "100% organic cotton from GreenFields Farms, Brazil.",
-      active: false,
+      active: true,
     },
     {
       image:
@@ -78,20 +79,44 @@ const Body = (props) => {
       active: false,
     },
   ]);
+  const rowRefs = useRef([]); // array for refs to each row
+
+if (rowRefs.current.length !== rows.length) {
+  // add or remove refs
+  rowRefs.current = Array(rows.length)
+    .fill()
+    .map((_, i) => rowRefs.current[i] || createRef());
+}
+
+const handleClick = (id) => {
+  props.appRef.current?.scrollTo({
+    top: rowRefs.current[id].offsetTop-props.appRef.current.clientHeight/3.2,
+    behavior: 'smooth'
+  });
+}
+
+useEffect(() => {
+}, [props.scrollPosition]);
+
+  
   return (
     <div className={style.BodyHolder}>
       <div className={style.ProgressBar}>
       <div style={{ ...progressBarStyles, height: `calc(${props.scrollPercentage/100} * 50vh)` }} className={style.ProgressLine}>
         {rows.map((row, id) => (
-          <div style={{ opacity: `${props.scrollPercentage>=id*(100/8)?1:0.5}`, 
+          <div style={{ opacity: `${props.scrollPercentage+2>=id*(100/8)?1:0.5}`, 
           top:`calc(50vh * ${id}/ 8)`, 
-          scale:`${props.scrollPercentage>=id*(100/8)?1:0.5}`,
-        }} className={style.ProgressCircle}></div>
+          scale:`${props.scrollPercentage+2>=id*(100/8)?1:0.5}`,
+        }} className={style.ProgressCircle}
+        onClick={e=>handleClick(id)}>
+          <div className={style.ProgressCircleInner}></div>
+          </div>
           ))}
       </div>
       </div>
       {rows.map((row, id) => (
-        <div key={id} className={`${style.Row} ${row.active===true?style.Active:style.Inactive} ${id % 2 === 0 ? "" : style.Reverse}`} ref={(el) => {
+        <div key={id} className={`${style.Row} ${row.active===true?style.Active:style.Inactive} ${id % 2 === 0 ? "" : style.Reverse}`}  ref={(el) => {
+          rowRefs.current[id] = el;
           if (el && props.scrollPosition >= el.offsetTop && props.scrollPosition < el.offsetTop + el.offsetHeight) {
             row.active = true;
           }

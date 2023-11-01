@@ -14,9 +14,7 @@ function App() {
     const calculateScrollPercentage = () => {
       if (appRef.current) {
         const scrollTop = appRef.current.scrollTop;
-        console.log(scrollTop);
         const docHeight = appRef.current.scrollHeight - appRef.current.clientHeight;
-        console.log(docHeight);
         const scrollPercent = (scrollTop / (docHeight)) * 100;
         setScrollPercentage(scrollPercent);
       }
@@ -43,7 +41,7 @@ function App() {
     <div className="App" ref={appRef}>
 
       <Header/>
-      <Body scrollPosition={scrollPosition} scrollPercentage={scrollPercentage}/>
+      <Body appRef={appRef} docHeight={appRef.current?.scrollHeight - appRef.current?.clientHeight} doc scrollPosition={scrollPosition} scrollPercentage={scrollPercentage}/>
       <div className="Footer">
         <div className="FooterText">
           <p>© 2023 Felt</p>

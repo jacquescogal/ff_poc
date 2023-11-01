@@ -19,16 +19,22 @@
     border-radius: 10px;
     .ProgressCircle{
         position: absolute;
-        background-color: $white;
-        height: 1rem;
-        width: 1rem;
-        padding: 0px;
-        margin: 0px;
-        transform: translateX(-37%) translateY(-50%);
+        background-color: transparent;
+        height: 2rem;
+        width: 2rem;
+        cursor: pointer;
+        margin: 1px;
+        transform: translateX(-45%) translateY(-50%) ;
         border-radius: 20%;
         transform-origin: left;
-        border: 1px solid $white;
         transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+        .ProgressCircleInner{
+            background-color: $white;
+            height: 1rem;
+            width: 1rem;
+            border-radius: 20%;
+            transform: translateX(50%) translateY(50%);
+        }
     }
 }
 
