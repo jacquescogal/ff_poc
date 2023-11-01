@@ -1,7 +1,7 @@
 @import './../../global';
 
 .HeaderHolder{
-    background-color: $white;
+    background-color: $background;
     position: sticky;
     top: 0;
     height: $header-height;
@@ -9,8 +9,9 @@
     flex-direction: column;
     align-items: center;
     border-bottom: 1px solid RGB(0, 0, 0, 0.5);
+    z-index: 100;
     .HeaderLogo{
-        color:$olive;
         scale: 0.8;
+        fill: $white;
     }
 }

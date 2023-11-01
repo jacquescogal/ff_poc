@@ -1,29 +1,35 @@
 import logo from './logo.svg';
 import Header from './components/header/Header';
 import './App.scss'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Body from './components/body/Body';
 
 
 function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const appRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollPosition(window.pageYOffset);
-      console.log(window.pageYOffset)
+      if (appRef.current) {
+        setScrollPosition(appRef.current.scrollTop);
+        console.log(appRef.current.scrollTop);
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    const appElement = appRef.current;
+    if (appElement) {
+      appElement.addEventListener('scroll', handleScroll);
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+      return () => {
+        appElement.removeEventListener('scroll', handleScroll);
+      };
+    }
   }, []);
   return (
-    <div className="App">
+    <div className="App" ref={appRef}>
       <Header/>
-      <Body/>
+      <Body appRef={appRef}/>
     </div>
   );
 }

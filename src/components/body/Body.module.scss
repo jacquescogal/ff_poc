@@ -1,0 +1,102 @@
+@import './../../global';
+
+.Scroll{
+    background-color: $white;
+}
+
+.BodyHolder{
+    background-color: $background;
+    color: $black;
+    min-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Row{
+    padding: 1rem;
+    $image-size: 30vw;
+    $text-size: calc(100% - #{$image-size});
+    background-color: $white;
+    height: $image-size;
+    width: 80%;
+    margin-left: 5%;
+    margin-right: 5%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    background-color: $background;
+    overflow: hidden;
+    &.Reverse{
+        flex-direction: row-reverse;
+    }
+    
+    .Image{
+        background-color: $background;
+        height: $image-size;
+        max-height: 100vw;
+        width: $image-size;
+        max-width: 100vw;
+        object-fit: cover;
+        object-position: center;
+        z-index: 50;
+    }
+    .Text{
+        background-color: $background;
+        height: 100%;
+        width: 10%;
+        width: $text-size;
+        position: relative;
+        word-break: break-word;
+        //center block
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .Block{
+            position:absolute;
+            top:40%;
+            transform: translateY(-50%);
+            width: 60%;
+            background-color: $background;
+            text-align: center;
+            .Title{
+                color: $white;
+            }
+            .Body{
+    
+                color:$white;
+                
+            }
+
+        }
+        
+    }
+}
+
+// change media based on screen size
+@media only screen and (max-width: 600px) {
+    .Row{
+        flex-direction: column;
+        $image-size: 80vw;
+        $text-size: calc(100% - #{$image-size});
+        height: 80vw;
+        &.Reverse{
+            flex-direction: column;
+        }
+        .Image{
+            height: 50vw;
+            width: $image-size;
+            overflow: hidden;
+        }
+        .Text{
+            height: 100%;
+            width: $image-size;
+            .Block{
+                top: 50%;
+                transform: translateY(-50%);
+                width: 80%;
+            }
+        }
+    }
+}
