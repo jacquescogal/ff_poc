@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import Header from './components/header/Header';
 import './App.scss'
 import React, { useEffect, useState } from 'react';
+import Body from './components/body/Body';
 
 
 function App() {
@@ -22,20 +23,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
+      <Body/>
     </div>
   );
 }
