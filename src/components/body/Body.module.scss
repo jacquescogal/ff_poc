@@ -4,6 +4,34 @@
     background-color: $white;
 }
 
+.ProgressBar{
+    position: fixed;
+    
+    top: 50%;
+    left: 1rem;
+    width: 4px;
+    height: 50vh;
+    background-color: $black;
+    z-index: 500;
+    transform: translateY(-50%);
+}
+.ProgressLine{
+    border-radius: 10px;
+    .ProgressCircle{
+        position: absolute;
+        background-color: $white;
+        height: 1rem;
+        width: 1rem;
+        padding: 0px;
+        margin: 0px;
+        transform: translateX(-37%) translateY(-50%);
+        border-radius: 20%;
+        transform-origin: left;
+        border: 1px solid $white;
+        transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+}
+
 .BodyHolder{
     background-color: $background;
     color: $black;
@@ -11,6 +39,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin-top: 20%;
+    margin-bottom: 20%;
 }
 .Row{
     padding: 1rem;
@@ -26,6 +57,19 @@
     position: relative;
     background-color: $background;
     overflow: hidden;
+    // transition opacity and scale
+    transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+    &.Active{
+        opacity: 1;
+        scale: 1;
+    }
+
+    &.Inactive{
+        opacity: 0.5;
+        scale: 0.9;
+    }
+
+
     &.Reverse{
         flex-direction: row-reverse;
     }
@@ -78,9 +122,14 @@
 @media only screen and (max-width: 600px) {
     .Row{
         flex-direction: column;
+        
         $image-size: 80vw;
         $text-size: calc(100% - #{$image-size});
         height: 80vw;
+        width: 100%;
+        align-items: center;
+        margin-left: 0;
+        margin-right: 0;
         &.Reverse{
             flex-direction: column;
         }
