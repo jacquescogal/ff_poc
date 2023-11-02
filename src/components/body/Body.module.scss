@@ -6,7 +6,6 @@
 
 .ProgressBar{
     position: fixed;
-    
     top: 50%;
     left: 1rem;
     width: 4px;
@@ -46,8 +45,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 20%;
-    margin-bottom: 20%;
 }
 .Row{
     padding: 1rem;
@@ -68,11 +65,14 @@
     &.Active{
         opacity: 1;
         scale: 1;
+        background-color: rgb(255, 255, 255);
+        color:$black;
     }
 
     &.Inactive{
         opacity: 0.5;
         scale: 0.9;
+        color:$white;
     }
 
 
@@ -91,7 +91,7 @@
         z-index: 50;
     }
     .Text{
-        background-color: $background;
+        background-color: inherit;
         height: 100%;
         width: 10%;
         width: $text-size;
@@ -108,16 +108,8 @@
             top:40%;
             transform: translateY(-50%);
             width: 60%;
-            background-color: $background;
+            background-color: inherit;
             text-align: center;
-            .Title{
-                color: $white;
-            }
-            .Body{
-    
-                color:$white;
-                
-            }
 
         }
         

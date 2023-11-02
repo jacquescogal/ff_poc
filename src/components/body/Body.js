@@ -88,15 +88,8 @@ if (rowRefs.current.length !== rows.length) {
     .map((_, i) => rowRefs.current[i] || createRef());
 }
 
-const handleClick = (id) => {
-  props.appRef.current?.scrollTo({
-    top: rowRefs.current[id].offsetTop-props.appRef.current.clientHeight/3.2,
-    behavior: 'smooth'
-  });
-}
 
-useEffect(() => {
-}, [props.scrollPosition]);
+
 
   
   return (
@@ -108,7 +101,7 @@ useEffect(() => {
           top:`calc(50vh * ${id}/ 8)`, 
           scale:`${props.scrollPercentage+2>=id*(100/8)?1:0.5}`,
         }} className={style.ProgressCircle}
-        onClick={e=>handleClick(id)}>
+        onClick={e=>props.handleCircleClick(id)}>
           <div className={style.ProgressCircleInner}></div>
           </div>
           ))}

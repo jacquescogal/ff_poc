@@ -4,7 +4,6 @@ import './App.scss'
 import React, { useEffect, useState, useRef } from 'react';
 import Body from './components/body/Body';
 
-
 function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [scrollPercentage, setScrollPercentage] = useState(0);
@@ -14,7 +13,8 @@ function App() {
     const calculateScrollPercentage = () => {
       if (appRef.current) {
         const scrollTop = appRef.current.scrollTop;
-        const docHeight = appRef.current.scrollHeight - appRef.current.clientHeight;
+        const docHeight = appRef.current.scrollHeight-appRef.current.clientHeight;
+        console.log(scrollTop,docHeight)
         const scrollPercent = (scrollTop / (docHeight)) * 100;
         setScrollPercentage(scrollPercent);
       }
@@ -37,11 +37,18 @@ function App() {
       };
     }
   }, []);
+
+  const handleCircleClick=(id)=>{
+    appRef.current?.scrollTo({
+      top: id*(appRef.current?.scrollHeight-appRef.current?.clientHeight)/8,
+      behavior: 'smooth'
+    });
+  }
   return (
     <div className="App" ref={appRef}>
 
       <Header/>
-      <Body appRef={appRef} docHeight={appRef.current?.scrollHeight - appRef.current?.clientHeight} doc scrollPosition={scrollPosition} scrollPercentage={scrollPercentage}/>
+      <Body handleCircleClick={handleCircleClick} appRef={appRef} docHeight={appRef.current?.scrollHeight - appRef.current?.clientHeight} doc scrollPosition={scrollPosition} scrollPercentage={scrollPercentage}/>
       <div className="Footer">
         <div className="FooterText">
           <p>© 2023 Felt</p>
